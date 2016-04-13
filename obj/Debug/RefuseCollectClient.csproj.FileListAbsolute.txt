@@ -1,0 +1,6 @@
+c:\users\peter\documents\visual studio 2015\Projects\RefuseCollectClient\RefuseCollectClient\bin\Debug\RefuseCollectClient.exe.config
+c:\users\peter\documents\visual studio 2015\Projects\RefuseCollectClient\RefuseCollectClient\bin\Debug\RefuseCollectClient.exe
+c:\users\peter\documents\visual studio 2015\Projects\RefuseCollectClient\RefuseCollectClient\bin\Debug\RefuseCollectClient.pdb
+c:\users\peter\documents\visual studio 2015\Projects\RefuseCollectClient\RefuseCollectClient\obj\Debug\RefuseCollectClient.csprojResolveAssemblyReference.cache
+c:\users\peter\documents\visual studio 2015\Projects\RefuseCollectClient\RefuseCollectClient\obj\Debug\RefuseCollectClient.exe
+c:\users\peter\documents\visual studio 2015\Projects\RefuseCollectClient\RefuseCollectClient\obj\Debug\RefuseCollectClient.pdb
