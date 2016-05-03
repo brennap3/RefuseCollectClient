@@ -1,19 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Http;
-using RefuseCollect;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net;
 
@@ -28,12 +14,12 @@ namespace RefuseCollectClient
         static void Main(string[] args)
         {
             string baseAddress = "http://localhost:45055/";
-            String guid = Guid.NewGuid().ToString();
-            String guid2 = Guid.NewGuid().ToString();
-            String guid3 = Guid.NewGuid().ToString();
+            string guid = Guid.NewGuid().ToString();
+            string guid2 = Guid.NewGuid().ToString();
+            string guid3 = Guid.NewGuid().ToString();
             string baseAddress2 = "http://pbrefusecollect.azurewebsites.net/";
             string baseAddress3 = "http://pbrefusecollect.azurewebsites.net/api/values/";
-            Console.WriteLine("This RowKey code is: "+guid);
+            Console.WriteLine("This RowKey code is: " + guid);
             Console.WriteLine("This RowKey code is: " + guid2);
 
             try
@@ -77,17 +63,57 @@ namespace RefuseCollectClient
 
             try
             {
+                HttpClient client7 = new HttpClient();
+                //     if (Aggtype == "Agg" && Aggquery == "CountById")
+                // public int Get(String id, String Aggtype, String Aggquery)
+                var response2x = client7.GetAsync(baseAddress + "api/values/D8/Agg/CountByIdCollect").Result;
+
+                Console.WriteLine(response2x);
+
+                Console.WriteLine("The count of refuse collected in D8 is: " + response2x.Content.ReadAsStringAsync().Result);
+
+                client7.Dispose();
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            try
+            {
+                HttpClient client7 = new HttpClient();
+                //     if (Aggtype == "Agg" && Aggquery == "CountById")
+                //     public int Get(String id, String Aggtype, String Aggquery)
+                var response2x = client7.GetAsync(baseAddress + "api/values/D8/Agg/CountByIdNotCollect").Result;
+
+                Console.WriteLine(response2x);
+
+                Console.WriteLine("The count of refuse not collected in D8 is: " + response2x.Content.ReadAsStringAsync().Result);
+
+                client7.Dispose();
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            try
+            {
                 HttpClient client2 = new HttpClient();
                 //string id, string pareaid, string platitude, string plongitude
 
                 //api / values
-                
+
                 var postrefuse = new RefuseCollect.Controllers.PostRefuse() { id = "D8", pareaid = guid, platitude = "6", plongitude = "56" };
                 Console.WriteLine(postrefuse.id);
 
 
                 //string baseAddress2 = "http://localhost:45055/api/values/";
-                
+
                 var response2 = client2.PostAsJsonAsync("http://localhost:45055/api/values/", postrefuse).Result;
                 client2.Dispose();
                 Console.WriteLine(response2);
@@ -108,7 +134,7 @@ namespace RefuseCollectClient
 
                 string postBody = JsonConvert.SerializeObject(postrefuse);
                 Console.WriteLine(postBody);
-                
+
                 var cli = new WebClient();
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
                 var response = cli.UploadString("http://localhost:45055/api/values/", postBody);
@@ -149,14 +175,14 @@ namespace RefuseCollectClient
                 Console.WriteLine(putrefuse.id);
                 Console.WriteLine(putrefuse.pareaid);
 
-                
+
 
                 string putBody = JsonConvert.SerializeObject(putrefuse);
                 Console.WriteLine(putBody);
 
                 var cli = new WebClient();
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
-                var response = cli.UploadString("http://localhost:45055/api/values/","PUT",putBody);
+                var response = cli.UploadString("http://localhost:45055/api/values/", "PUT", putBody);
                 Console.WriteLine(response);
 
             }
@@ -168,7 +194,7 @@ namespace RefuseCollectClient
             try
             {
                 HttpClient client4 = new HttpClient();
-                var response4 = client4.DeleteAsync("http://localhost:45055/api/values/"+guid).Result;
+                var response4 = client4.DeleteAsync("http://localhost:45055/api/values/" + guid).Result;
                 client4.Dispose();
                 Console.WriteLine(response4);
 
@@ -207,7 +233,7 @@ namespace RefuseCollectClient
 
                 Console.WriteLine(response2x);
 
-                Console.WriteLine("Calling the "+response2x.Content.ReadAsStringAsync().Result);
+                Console.WriteLine("Calling the " + response2x.Content.ReadAsStringAsync().Result);
 
                 client6.Dispose();
 
@@ -230,7 +256,7 @@ namespace RefuseCollectClient
                 var cli = new WebClient();
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
                 var response = cli.UploadString(baseAddress3, postBody);
-                    
+
                 Console.WriteLine(response);
             }
             catch (Exception e)
@@ -250,7 +276,7 @@ namespace RefuseCollectClient
                 var cli = new WebClient();
                 cli.Headers[HttpRequestHeader.ContentType] = "application/json";
                 var response = cli.UploadString(baseAddress3, "PUT", putBody); // see https://social.msdn.microsoft.com/Forums/vstudio/en-US/42de08af-9563-4ad3-ad51-e909994c78f9/webclient-put-to-webapi-method?forum=csharpgeneral
-                Console.WriteLine("put request to azure webservice: "+response);
+                Console.WriteLine("put request to azure webservice: " + response);
 
             }
             catch (Exception e)
